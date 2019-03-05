@@ -46,6 +46,13 @@ def index():
 @app.route("/get_products/webshop/<string:webshop>/")
 @app.route("/get_products/tags/<string:tags>/")
 @app.route("/get_products/prod_ids/<string:prod_ids>/")
+@app.route("/get_products/<int:limit_value>/")
+@app.route("/get_products/brand/<string:brand>/<int:limit_value>/")
+@app.route("/get_products/cat/<string:cat>/<int:limit_value>/")
+@app.route("/get_products/cat/<string:cat>/<string:subcat>/<int:limit_value>/")
+@app.route("/get_products/webshop/<string:webshop>/<int:limit_value>/")
+@app.route("/get_products/tags/<string:tags>/<int:limit_value>/")
+@app.route("/get_products/prod_ids/<string:prod_ids>/<int:limit_value>/")
 @cache.cached(timeout=43200)
 def get_products(
     brand: str = None,
@@ -54,6 +61,7 @@ def get_products(
     webshop: str = None,
     tags: str = None,
     prod_ids: str = None,
+    limit_value: int = None,
 ):
     """Get all products, or filtered products.
 
@@ -64,6 +72,7 @@ def get_products(
         webshop (str, optional): Defaults to None. [description]
         tags (str, optional): Defaults to None. [description]
         prod_ids (str, optional): Defaults to None. [description]
+        limit_value (int, optional): Defaults to None. [description]
 
     Returns:
         List of products received in the query
@@ -113,6 +122,8 @@ def get_products(
         )
     else:
         statement = product_table.select().where(product_table.c.deleted == False)
+    if limit_value:
+        statement = statement.limit(limit_value)
     try:
         conn = engine.connect()
         products = conn.execute(statement).fetchall()
