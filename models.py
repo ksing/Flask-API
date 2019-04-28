@@ -20,7 +20,7 @@ certification_table = Table(
     Column('url', VARCHAR(128)),
 )
 
-ff_criteria = Table(
+ff_criterion_table = Table(
     "FairFrog_Criteria",
     metadata,
     Column('Id', TINYINT(unsigned=True), primary_key=True, unique=True),
