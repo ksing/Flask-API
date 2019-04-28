@@ -3,7 +3,7 @@ from sqlalchemy.dialects.mysql import BOOLEAN, FLOAT, SMALLINT, TEXT, TINYINT, V
 
 metadata = MetaData()
 
-payment_methods = Table(
+payment_method_table = Table(
     "Payment_Methods",
     metadata,
     Column('shortName', VARCHAR(4), primary_key=True, unique=True),
@@ -11,7 +11,7 @@ payment_methods = Table(
     Column('fullName', VARCHAR(64)),
 )
 
-certifications = Table(
+certification_table = Table(
     "Certifications_List",
     metadata,
     Column('Id', TINYINT(unsigned=True), primary_key=True, unique=True),
@@ -29,7 +29,7 @@ ff_criteria = Table(
     Column('description', VARCHAR(1024), default=''),
 )
 
-brands = Table(
+brand_table = Table(
     "Brands",
     metadata,
     Column('Id', SMALLINT(unsigned=True), primary_key=True, unique=True),
@@ -42,7 +42,7 @@ brands = Table(
     Column('deleted', BOOLEAN, default=False),
 )
 
-webshops = Table(
+webshop_table = Table(
     'Webshops',
     metadata,
     Column('Id', TINYINT(unsigned=True), primary_key=True, unique=True),
@@ -64,7 +64,7 @@ webshops = Table(
     Column('deleted', BOOLEAN, default=False),
 )
 
-products = Table(
+product_table = Table(
     'Products',
     metadata,
     Column('Id', SMALLINT(unsigned=True), primary_key=True, unique=True),
@@ -85,7 +85,7 @@ products = Table(
     Column('deleted', BOOLEAN, default=False),
 )
 
-popular_products = Table(
+popular_product_table = Table(
     'Popular_Products',
     metadata,
     Column('Id', TINYINT(unsigned=True), primary_key=True, unique=True),
