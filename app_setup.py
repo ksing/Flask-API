@@ -37,7 +37,7 @@ cache = Cache(
 )
 
 app.config.from_pyfile('config.py')
-CORS(app)
+CORS(app, origins=["https://fairfrog.webhop.me", "https://fairfrog.nl"], methods=["GET"])
 
 engine = create_engine(
     app.config['SQLALCHEMY_DB_URI'],
